@@ -33,78 +33,79 @@
 			<% @student.courses.each_with_index() do |c, i| %>
 			<% if (i == 0) %>
 			<li class = "active">
-			<% end %>
-			<% if (i > 0) %>
-			<li>
-			<% end %>
-			<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab"><%= c.subject+' '+c.catalog_number %></a>
-			</li>
-			<% end %>
-		</ul>
-
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<% @student.courses.each_with_index do |c, i| %>
-			<% if (i == 0) %>
-			<div class="tab-pane active" id="<%= c.id.to_s %>">
 				<% end %>
 				<% if (i > 0) %>
-				<div class="tab-pane" id="<%= c.id.to_s %>">
+				<li>
 					<% end %>
-					<% if c.questions.empty? %>
-					<div class = "row">
-						<div class = "col-md-10 col-md-offset-1">
-							<br><br>
-							<p class = "question">There are no questions posted for this course yet.</p>
+					<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab"><%= c.subject+' '+c.catalog_number %></a>
+				</li>
+				<% end %>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<% @student.courses.each_with_index do |c, i| %>
+				<% if (i == 0) %>
+				<div class="tab-pane active" id="<%= c.id.to_s %>">
+					<% end %>
+					<% if (i > 0) %>
+					<div class="tab-pane" id="<%= c.id.to_s %>">
+						<% end %>
+						<% if c.questions.empty? %>
+						<div class = "row">
+							<div class = "col-md-10 col-md-offset-1">
+								<br><br>
+								<p class = "question">There are no questions posted for this course yet.</p>
+							</div>
 						</div>
-					</div>
-					<% else %>
-					<% for question in c.questions.sort_by { |q| q.created_at }.reverse %>
-					<br><br>
-					<div class = "row">
-						<div class = "col-md-10 col-md-offset-1">
-							<% if question.read?(current_student ? current_student : current_professor) %>
+						<% else %>
+						<% for question in c.questions.sort_by { |q| q.created_at }.reverse %>
+						<br><br>
+						<div class = "row">
+							<div class = "col-md-10 col-md-offset-1">
+								<% if question.read?(current_student ? current_student : current_professor) %>
 								<p class = "question"><span class="q-id-upvote-<%=question.id %>" style="font-size:40px;font-weight:700;position:relative;top:8px;cursor:pointer">^&nbsp;</span><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-							<% else %>
+								<% else %>
 								<strong>
 									<p class = "question"><span class="q-id-upvote-<%=question.id %>" style="font-size:35px;font-weight:700;position:relative;top:8px;cursor:pointer">^&nbsp;</span><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
 								</strong>
-							<% end %>
-						</div>
-					</div>
-					<div class = "row">
-						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question_info"><span id="upvotes-<%=question.id%>"><%= question.upvotes.count %></span> Upvotes | by <%= "#{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago" %> </p>
-						</div>
-					</div>
-					<div class = "row">
-						<div class = "col-md-6 col-md-offset-1">
-							<div class = "row" id = "line">
+								<% end %>
 							</div>
 						</div>
+						<div class = "row">
+							<div class = "col-md-10 col-md-offset-1">
+								<p class = "question_info"><span id="upvotes-<%=question.id%>"><%= question.upvotes.count %></span> Upvotes | by <%= "#{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago" %> </p>
+							</div>
+						</div>
+						<div class = "row">
+							<div class = "col-md-6 col-md-offset-1">
+								<div class = "row" id = "line">
+								</div>
+							</div>
+						</div>
+
+						<script>
+
+							$(".q-id-upvote-<%= question.id%>").on("click", function(){
+								$.ajax({
+									url: "/courses/" + <%= question.course_id %> + "/questions/" + <%= question.id %> + "/add_upvote",
+									dataType: "json",
+									type: "POST",
+									done: function(data) {
+										console.log(data);
+									}
+								})
+
+								var upvotes = $('#upvotes-<%=question.id%>').html();
+								$('#upvotes-<%=question.id%>').html(parseInt(upvotes) + 1)
+							})
+
+						</script>
+						<% end %>
+						<% end %>
 					</div>
-
-					<script>
-
-					$(".q-id-upvote-<%= question.id%>").on("click", function(){
-						$.ajax({
-							url: "/courses/" + <%= question.course_id %> + "/questions/" + <%= question.id %> + "/add_upvote",
-							dataType: "json",
-							type: "POST",
-							done: function(data) {
-								console.log(data);
-							}
-						})
-
-						var upvotes = $('#upvotes-<%=question.id%>').html();
-						$('#upvotes-<%=question.id%>').html(parseInt(upvotes) + 1)
-					})
-
-					</script>
-				<% end %>
-				<% end %>
+					<% end %>
 				</div>
-			<% end %>
 			</div>
 		</div>
 	</div>
@@ -201,8 +202,8 @@
 		}
 
 		.tab-pane {
-			min-height: 350px;
-			max-height: 350px;
+			min-height: 375px;
+			max-height: 375px;
 			overflow-x: hidden;
 			overflow-y: scroll; 
 		}
@@ -222,7 +223,7 @@
 		#askQuestion {
 			position: absolute;
 			left: 70%;
-			top: 60%;
+			top: 90%;
 			z-index: 1;
 		}
 
