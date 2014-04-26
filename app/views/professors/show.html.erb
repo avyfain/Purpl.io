@@ -3,7 +3,7 @@
 </div>
 
 
-<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
+<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @professor.courses.first.subject+' '+@professor.courses.first.catalog_number %></button>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -13,7 +13,7 @@
         <h4 class="modal-title">Question</h4>
       </div>
       <div class="modal-body">
-		<%= form_tag("/courses/"+@student.courses.first.id.to_s+"/questions", method: "get", id: "modalaction") do %>
+		<%= form_tag("/courses/"+@professor.courses.first.id.to_s+"/questions", method: "get", id: "modalaction") do %>
 			<%= label_tag(:question, "Question") %>
 			<br>
 			<%= text_field_tag(:text, nil, class: "form-control") %>
@@ -34,7 +34,7 @@
 	<div class = "col-md-12">
 		<br>
 		<ul class="nav nav-pills nav-justified">
-		<% @student.courses.each_with_index() do |c, i| %>
+		<% @professor.courses.each_with_index() do |c, i| %>
 			<% if (i == 0) %>
 			<li class = "active">
 			<% end %>
@@ -50,7 +50,7 @@
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<% @student.courses.each_with_index do |c, i| %>
+			<% @professor.courses.each_with_index do |c, i| %>
 				<% if (i == 0) %>
 				<div class = "tab-pane active" id="<%= c.subject+c.catalog_number %>">
 				<% end %>
@@ -80,7 +80,7 @@
 					</div>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Professor.find(question.professor_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
 						</div>
 					</div>
 					<div class = "row">

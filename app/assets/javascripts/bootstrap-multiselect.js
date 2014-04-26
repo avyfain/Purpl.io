@@ -206,7 +206,7 @@
             selectAllValue: 'multiselect-all',
             enableFiltering: false,
             enableCaseInsensitiveFiltering: false,
-            filterPlaceholder: 'Search',
+            filterPlaceholder: 'Search Courses',
             // possible options: 'text', 'value', 'both'
             filterBehavior: 'text',
             preventInputChangeEvent: false,
