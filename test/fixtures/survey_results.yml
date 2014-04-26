@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classtime: MyString
+  homework: MyString
+  midterm: MyString
+  workload: MyString
+  material: MyString
+  pace: MyString
+  passion: MyString
+  other: MyText
+
+two:
+  classtime: MyString
+  homework: MyString
+  midterm: MyString
+  workload: MyString
+  material: MyString
+  pace: MyString
+  passion: MyString
+  other: MyText

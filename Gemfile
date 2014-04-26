@@ -21,7 +21,8 @@ gem 'httparty', '~> 0.13.1'
 gem 'json', '~> 1.8.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bootstrap_form'
-gem 'bcrypt-ruby', '3.1.2'
+gem 'bootstrap-slider-rails'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
