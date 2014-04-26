@@ -10,7 +10,9 @@ class QuestionsController < ApplicationController
     @answers = Answer.where(question_id: @question.id).sort_by { |a| [ a.student_id ? 0 : 1, a.created_at] }.reverse
     @new_answer = Answer.new
 
-    @question.readmap += (current_student ? current_student.id.to_s + "|" : current_professor.id.to_s + "|")
+    if not @question.read?(current_student ? current_student : current_professor)
+      @question.readmap += (current_student ? current_student.id.to_s + "|" : current_professor.id.to_s + "|")
+    end
     @question.save
   end
 
