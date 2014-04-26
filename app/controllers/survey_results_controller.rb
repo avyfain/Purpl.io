@@ -13,7 +13,7 @@ class SurveyResultsController < ApplicationController
                   ["midterm","The midterm focused on relevant class material."],
                   ["workload","The weekly workload is acceptable"],
                   ["material","The class material (lectures, books, etc.) is useful and easily available."],
-                  ["pace","The course pace is"],
+                  ["pace","The course pace is too fast"],
                   ["passion","The instructor is passionate about teaching the course."]
                   ]
   end
@@ -40,7 +40,7 @@ class SurveyResultsController < ApplicationController
 
     respond_to do |format|
       if @survey_result.save
-        format.html { redirect_to @course, notice: 'Survey result was successfully created.' }
+        format.html { redirect_to course_path(params[:course_id]), notice: 'Survey result was successfully created.' }
         format.json { render action: 'show', status: :created, location: @survey_result }
       else
         format.html { render action: 'new' }
