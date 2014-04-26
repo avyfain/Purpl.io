@@ -96,6 +96,7 @@ Question.all.each do |q|
 		Answer.create!(
 			text: sentence,
 			student_id: Student.all.sample.id,
+			question_id: q.id
 			)
 		q.readmap = "#{Answer.last.student_id.to_s}|"	
 		q.save

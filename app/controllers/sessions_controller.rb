@@ -26,6 +26,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:student_id] = nil
+    session[:professor_id] = nil
     redirect_to root_path
   end
 end
