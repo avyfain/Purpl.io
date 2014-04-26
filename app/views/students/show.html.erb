@@ -3,76 +3,72 @@
 </div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Question</h4>
-      </div>
-      <div class="modal-body">
-		<%= form_tag("/courses/"+@student.courses.first.id.to_s+"/questions", method: "get", id: "modalaction") do %>
-			<%= label_tag(:question, "Question") %>
-			<br>
-			<%= text_field_tag(:text, nil, class: "form-control") %>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Question</h4>
+			</div>
+			<div class="modal-body">
+				<%= form_tag("/courses/"+@student.courses.first.id.to_s+"/questions", method: "get", id: "modalaction") do %>
+				<%= label_tag(:question, "Question") %>
+				<br>
+				<%= text_field_tag(:text, nil, class: "form-control") %>
 
-      </div>
-      <div class="modal-footer">
-		<%= submit_tag("Submit", class: "form-control btn btn-primary new-question-submit")%>
-		<% end %>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+			</div>
+			<div class="modal-footer">
+				<%= submit_tag("Submit", class: "form-control btn btn-custom-lighten new-question-submit")%>
+				<% end %>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<h1 class = "pull-left">Courses Page</h1>
-
-<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
+<button id = "askQuestion" class = "btn btn-custom-lighten" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
 
 <div id = "newsfeed" class = "row">
 	<div class = "col-md-12">
 		<br>
 		<ul class="nav nav-pills nav-justified">
-		<% @student.courses.each_with_index() do |c, i| %>
+			<% @student.courses.each_with_index() do |c, i| %>
 			<% if (i == 0) %>
 			<li class = "active">
 			<% end %>
 			<% if (i > 0) %>
 			<li>
 			<% end %>
-				<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab">
-					<%= c.subject+' '+c.catalog_number %>
-				</a>
+			<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab"><%= c.subject+' '+c.catalog_number %></a>
 			</li>
-		<% end %>
+			<% end %>
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<% @student.courses.each_with_index do |c, i| %>
-				<% if (i == 0) %>
-				<div class="tab-pane active" id="<%= c.id.to_s %>">
+			<% if (i == 0) %>
+			<div class="tab-pane active" id="<%= c.id.to_s %>">
 				<% end %>
 				<% if (i > 0) %>
 				<div class="tab-pane" id="<%= c.id.to_s %>">
-				<% end %>
-				<% if c.questions.empty? %>
+					<% end %>
+					<% if c.questions.empty? %>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
 							<br><br>
 							<p class = "question">There are no questions posted for this course yet.</p>
 						</div>
 					</div>
-				<% else %>
-				<% for question in c.questions.sort_by { |q| q.created_at }.reverse %>
+					<% else %>
+					<% for question in c.questions.sort_by { |q| q.created_at }.reverse %>
 					<br><br>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
 							<% if question.read?(current_student ? current_student : current_professor) %>
-								<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+							<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
 							<% else %>
-								<strong>
-									<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-								</strong>
+							<strong>
+								<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+							</strong>
 							<% end %>
 						</div>
 					</div>
@@ -87,135 +83,138 @@
 							</div>
 						</div>
 					</div>
-				<% end %>
+					<% end %>
 				<% end %>
 				</div>
 			<% end %>
+			</div>
 		</div>
 	</div>
 </div>
 
-<script>
-	window.onload = function(){
+	<script>
+		window.onload = function(){
 
-		url_string = null;
-		courseid = null;
+			url_string = null;
+			courseid = null;
 
-		num = window.location.search.split("=")[1];
+			num = window.location.search.split("=")[1];
 
 
-		if (num == undefined) {
-		} else {
-			$(".course_id_"+<%=@student.courses.first.id%>).parent().attr('class', '');
-			$("#"+"<%=@student.courses.first.id.to_s%>").attr('class', 'tab-pane');
+			if (num == undefined) {
+			} else {
+				$(".course_id_"+<%=@student.courses.first.id%>).parent().attr('class', '');
+				$("#"+"<%=@student.courses.first.id.to_s%>").attr('class', 'tab-pane');
 
-			$(".course_id_"+num).parent().attr('class', 'active');
-			$("#"+num).attr('class', 'tab-pane active')
+				$(".course_id_"+num).parent().attr('class', 'active');
+				$("#"+num).attr('class', 'tab-pane active')
+			}
+
+			$('.pill').on("click", function(e){
+				question_button = $('#askQuestion').html().split(" ");
+				question_button.pop();
+				question_button.pop();
+				active_pill = $(this).html();
+				question_button.push(active_pill);
+				$('#askQuestion').html(question_button.join(" "));
+
+				value = $(this).attr('class').split(" ");
+				value = value.pop();
+				value = value.split("_");
+				courseid = value.pop();
+
+				url_string = $('#modalaction').attr('action').split("/");
+				url_string.pop();
+				url_string.pop();
+				url_string.push(courseid);
+				url_string.push("questions");
+				url_string = url_string.join("/");
+
+				console.log(url_string);
+
+				$('#modalaction').attr('action',url_string);
+
+
+			});
+
+			$('.new-question-submit').on("click", function(e){
+				e.preventDefault();
+				$.ajax({
+					url: url_string,
+					dataType: "json",
+					type: "POST",
+					data: { text: $('#text').val(), course_id: courseid},
+					success: function(data) {
+						$('#myModal').modal('toggle');
+						window.location.href = '/students/'+<%= @student.id %>+ '?num=' + courseid;				}
+					})
+			})
+		}
+	</script>
+
+	<style>
+		#upvote {
+			-webkit-transform:rotate(180deg);
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 8px solid #000000;
 		}
 
-		$('.pill').on("click", function(e){
-			question_button = $('#askQuestion').html().split(" ");
-			question_button.pop();
-			question_button.pop();
-			active_pill = $(this).html();
-			question_button.push(active_pill);
-			$('#askQuestion').html(question_button.join(" "));
+		#line {
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+			border-top: 1px solid #000;
+			border-bottom: 1px solid #000;
+		}
 
-			value = $(this).attr('class').split(" ");
-			value = value.pop();
-			value = value.split("_");
-			courseid = value.pop();
+		.pill {
+			line-height: 225%;
+			font-size: 225%;
+			color: black;
+		}
 
-			url_string = $('#modalaction').attr('action').split("/");
-			url_string.pop();
-			url_string.pop();
-			url_string.push(courseid);
-			url_string.push("questions");
-			url_string = url_string.join("/");
+		.nav {
+			background-color: rgba(66, 36, 96, .5);
+		}
 
-			console.log(url_string);
+		#newsfeed {
+			border-radius: 1%;
+			background-color: rgba(255, 255, 255, .7);
+		}
 
-			$('#modalaction').attr('action',url_string);
+		.tab-pane {
+			min-height: 350px;
+			max-height: 350px;
+			overflow-x: hidden;
+			overflow-y: scroll; 
+		}
 
+		.question {
+			font-size: 200%;
+			line-height: 150%;
+			color: #381C52!important;
+		}
 
-		});
+		.question_info {
+			font-size: 100%;
+			line-height: 150%;
+			color: #381C52!important;
+		}
 
-		$('.new-question-submit').on("click", function(e){
-			e.preventDefault();
-			$.ajax({
-				url: url_string,
-				dataType: "json",
-				type: "POST",
-				data: { text: $('#text').val(), course_id: courseid},
-				success: function(data) {
-					$('#myModal').modal('toggle');
-					window.location.href = '/students/'+<%= @student.id %>+ '?num=' + courseid;				}
-			})
-		})
-	}
-</script>
+		#askQuestion {
+			position: absolute;
+			left: 70%;
+			top: 60%;
+			z-index: 1;
+		}
 
-<style>
-	#upvote {
-		-webkit-transform:rotate(180deg);
-		border-left: 8px solid transparent;
-	    border-right: 8px solid transparent;
-	    border-top: 8px solid #000000;
-	}
-
-	#line {
-		border-left: 1px solid #000;
-		border-right: 1px solid #000;
-		border-top: 1px solid #000;
-		border-bottom: 1px solid #000;
-	}
-
-	.pill {
-		line-height: 250%;
-		font-size: 250%;
-		color: black;
-	}
-
-	.nav {
-		background-color: rgba(87, 136, 232, .5);
-	}
-
-	#newsfeed {
-		border-radius: 1%;
-		background-color: rgba(255, 255, 255, .8);
-	}
-
-	.tab-pane {
-		min-height: 350px;
-		max-height: 350px;
-		overflow-x: hidden;
-		overflow-y: scroll; 
-	}
-
-	.question {
-		font-size: 200%;
-		line-height: 150%;
-	}
-
-	.question_info {
-		font-size: 100%;
-		line-height: 150%;
-	}
-
-	#askQuestion {
-		position: absolute;
-		left: 70%;
-		top: 60%;
-		z-index: 1;
-	}
-	
-	#background {
-		position: fixed;
-		z-index: -1;
-		width: 120%;
-		left: -10%;
-		-webkit-filter: blur(4px) brightness(1.1);
-		-ms-filter: blur(4px) brightness(1.1);
-		filter: blur(4px) brightness(1.1);
-	}
-</style>
+		#background {
+			position: fixed;
+			z-index: -1;
+			width: 120%;
+			left: -10%;
+			-webkit-filter: blur(4px) brightness(.9);
+			-ms-filter: blur(4px) brightness(.9);
+			filter: blur(4px) brightness(.9);
+		}
+	</style>
