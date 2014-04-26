@@ -10,11 +10,11 @@
         <span class="icon-bar"></span>
       </button>
       <% if current_student%>
-      <span class="navbar-brand"><%= link_to "NUClass", student_path(current_student.id), id: "logo" %></span>
+      <span class="navbar-brand"><%= link_to "Purple.io", student_path(current_student.id), id: "logo" %></span>
       <% elsif current_professor %>
-      <span class="navbar-brand"><%= link_to "NUClass", professor_path(current_professor.id), id: "logo" %></span>
+      <span class="navbar-brand"><%= link_to "Purple.io", professor_path(current_professor.id), id: "logo" %></span>
       <% else %>
-      <span class="navbar-brand"><%= link_to "NUClass", root_path, id: "logo" %></span>
+      <span class="navbar-brand"><%= link_to "Purple.io", root_path, id: "logo" %></span>
       <% end %>
     </div>
 
@@ -43,18 +43,17 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
        -->
-       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Reviews<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-              <% if current_professor %>
+      <% if current_professor %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Reviews<b class="caret"></b></a>
+            <ul class="dropdown-menu">
               <%current_professor.courses.each do |c| %>
                 <li><%= link_to "#{c.subject}-#{c.catalog_number}",  course_survey_results_path(c.id) %></li>
               <% end %>
-              <% end %>
-          </ul>
-        </li>
-
+            </ul>
+          </li>
+      <% end %>
 
         <!-- <li class="dropdown"> -->
           <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a> -->
