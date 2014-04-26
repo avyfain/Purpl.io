@@ -21,6 +21,7 @@ gem 'httparty', '~> 0.13.1'
 gem 'json', '~> 1.8.1'
 gem 'bootstrap_form'
 gem 'd3_rails'
+gem 'faker'
 
 
 group :doc do

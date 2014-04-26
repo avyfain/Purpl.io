@@ -2,7 +2,7 @@
 <h2> <%= "#{@course.subject}-#{@course.catalog_number}, #{@course.term}" %> </h2>
 
 <h3>Overall Impression:</h3>
-<p>Number of students who have taken the survey: 10</p>
+<p>Number of students who have taken the survey: <%= (20..50).to_a.sample %></p>
 
 <script type="text/javascript">
   var score = 0;
