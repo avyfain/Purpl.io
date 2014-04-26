@@ -24,7 +24,7 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<button id = "askQuestion" class = "btn btn-custom-lighten" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
+<div class = "well well-large" id = "askQuestion"><button class = "btn btn-custom-lighten" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button></div>
 
 <div id = "newsfeed" class = "row">
 	<div class = "col-md-12">
@@ -202,8 +202,8 @@
 		}
 
 		.tab-pane {
-			min-height: 375px;
-			max-height: 375px;
+			min-height: 500px;
+			max-height: 500px;
 			overflow-x: hidden;
 			overflow-y: scroll; 
 		}
@@ -223,7 +223,7 @@
 		#askQuestion {
 			position: absolute;
 			left: 70%;
-			top: 90%;
+			top: 85%;
 			z-index: 1;
 		}
 
