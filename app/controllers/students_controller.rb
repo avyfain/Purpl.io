@@ -81,6 +81,8 @@ class StudentsController < ApplicationController
 		# params[:courses].each { c = C.find_by(id), current_student.courses << c }
 	end
 
+
+
 	   # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:id, :email, :password, :password_confirmation, :year, :major, :created_at, :updated_at)
