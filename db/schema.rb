@@ -11,26 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426022045) do
+ActiveRecord::Schema.define(version: 20140426023451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.text    "text"
-    t.integer "upvotes"
-    t.integer "question_id"
-    t.integer "student_id"
+    t.text     "text"
+    t.integer  "upvotes"
+    t.integer  "question_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "courses", force: true do |t|
-    t.string  "title"
-    t.string  "subject"
-    t.string  "catalog_number"
-    t.integer "section"
-    t.string  "term"
-    t.integer "professor_id"
-    t.text    "readmap"
+    t.string   "title"
+    t.string   "subject"
+    t.string   "catalog_number"
+    t.integer  "section"
+    t.string   "term"
+    t.integer  "professor_id"
+    t.text     "readmap"
+    t.string   "professor_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "courses_students", force: true do |t|
@@ -39,15 +44,19 @@ ActiveRecord::Schema.define(version: 20140426022045) do
   end
 
   create_table "professors", force: true do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
-    t.text    "text"
-    t.string  "category"
-    t.integer "student_id"
-    t.integer "course_id"
+    t.text     "text"
+    t.string   "category"
+    t.integer  "student_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "seen_questions", force: true do |t|
@@ -57,10 +66,12 @@ ActiveRecord::Schema.define(version: 20140426022045) do
   end
 
   create_table "students", force: true do |t|
-    t.string  "email"
-    t.string  "password_digest"
-    t.integer "year"
-    t.string  "major"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "year"
+    t.string   "major"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
