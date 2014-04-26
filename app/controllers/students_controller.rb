@@ -65,6 +65,7 @@ class StudentsController < ApplicationController
 		#this is the postx
 
 		@student = Student.find(params[:id])
+		@student.courses = []
 		@student.courses.push(Course.find(params["course1"]), Course.find(params["course2"]), Course.find(params["course3"]), Course.find(params["course4"]))
 
 		respond_to do |format|
