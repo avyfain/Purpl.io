@@ -18,6 +18,6 @@ NUClass::Application.routes.draw do
 
 
 
-root 'courses#index'
+root 'sessions#new'
 
 end

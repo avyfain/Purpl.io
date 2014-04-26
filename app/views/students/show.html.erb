@@ -1,5 +1,109 @@
-<h1>A Greeting for You!</h1>
+<div id = "background">
+	<img class = "img-responsive" src = "https://farm8.staticflickr.com/7340/9036889381_e6b35a7724_k.jpg">
+</div>
 
-<% @student.courses.each do |c| %>
-	<h2><%= link_to c.subject+c.catalog_number+c.title, course_path(c.id) %></h2>
-<% end %>
+<h1>Courses Page</h1>
+
+
+<div id = "newsfeed" class = "row">
+	<div class = "col-md-12">
+		<br>
+		<ul class="nav nav-pills nav-justified">
+		<% @student.courses.each do |c| %>
+			<li>
+				<a class = "pill" href="<%= '#'+c.subject+c.catalog_number %>" data-toggle = "tab">
+					<%= c.subject+' '+c.catalog_number %>
+				</a>
+			</li>
+		<% end %>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<% @student.courses.each do |c| %>
+				<div class = "tab-pane" id="<%= c.subject+c.catalog_number %>">
+				<% for i in 0..5 %>
+					<br><br>
+					<div class = "row">
+						<div class = "col-md-10">
+							<p>What is the answer to homework 3 problem 2a?</p>
+						</div>
+					</div>
+					<div class = "row">
+						<div class = "col-md-10 col-md-offset-1">
+							<p class = "question_info">13 Upvotes | by Brian | 2 Comments</p>
+						</div>
+					</div>
+					<div class = "row">
+						<div class = "col-md-6 col-md-offset-1">
+							<div class = "row" id = "line">
+							</div>
+						</div>
+					</div>
+				<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<style>
+	#upvote {
+		-webkit-transform:rotate(180deg);
+		border-left: 8px solid transparent;
+	    border-right: 8px solid transparent;
+	    border-top: 8px solid #000000;
+	}
+
+	#line {
+		border-left: 1px solid #000;
+		border-right: 1px solid #000;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+	}
+
+	.pill {
+		line-height: 250%;
+		font-size: 250%;
+		color: black;
+	}
+
+	.nav {
+		background-color: rgba(87, 136, 232, .5);
+	}
+
+	#newsfeed {
+		border-radius: 1%;
+		background-color: rgba(255, 255, 255, .8);
+	}
+
+	.tab-pane {
+		max-height: 350px;
+		overflow: scroll;
+	}
+
+	.tab-content p {
+		font-size: 200%;
+		line-height: 150%;
+	}
+
+	.question {
+		font-size: 200%;
+		line-height: 150%;
+	}
+
+	.question_info {
+		font-size: 150%;
+		line-height: 150%;
+	}
+	
+	#background {
+		position: fixed;
+		z-index: -1;
+		width: 120%;
+		left: -10%;
+		-webkit-filter: blur(4px) brightness(1.1);
+		-ms-filter: blur(4px) brightness(1.1);
+		filter: blur(4px) brightness(1.1);
+	}
+</style>
