@@ -1,3 +1,7 @@
+<div id = "background">
+	<img class = "img-responsive" src = "https://farm9.staticflickr.com/8526/8519889438_5d2296deee_k.jpg">
+</div>
+
 <!--___________________-->
 <div id = "newsfeed" class = "row">
 	<div class = "col-md-12">
@@ -72,7 +76,7 @@
 
 						<%= text_field_tag "answer", nil, placeholder: "Your answer", class: "form-control", id: "textbox" %>
 						<br><br>
-						<%= submit_tag "Add Answer", class: "btn btn-primary pull-left", id: "textbutton" %>
+						<%= submit_tag "Add Answer", class: "btn btn-custom-lighten pull-left", id: "textbutton" %>
 
 						<% end %>
 
@@ -93,13 +97,13 @@
 	}
 
 	.pill {
-		line-height: 250%;
-		font-size: 250%;
+		line-height: 225%;
+		font-size: 225%;
 		color: black;
 	}
 
 	.nav {
-		background-color: rgba(87, 136, 232, .5);
+		background-color: rgba(66, 36, 96, .5);
 	}
 
 	#newsfeed {
@@ -148,6 +152,7 @@
 		z-index: -1;
 		width: 120%;
 		left: -10%;
+		top: -10%;
 		-webkit-filter: blur(4px) brightness(1.1);
 		-ms-filter: blur(4px) brightness(1.1);
 		filter: blur(4px) brightness(1.1);
