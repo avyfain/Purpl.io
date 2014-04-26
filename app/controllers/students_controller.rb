@@ -58,7 +58,7 @@ class StudentsController < ApplicationController
 
 	def add_courses
 		#this is the postx
-1
+
 		@student = Student.find(params[:id])
 		@student.courses.push(Course.find(params["course1"]), Course.find(params["course2"]), Course.find(params["course3"]), Course.find(params["course4"]))
 

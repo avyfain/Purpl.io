@@ -28,8 +28,6 @@ GEM
     arel (4.0.2)
     bcrypt (3.1.7)
     bcrypt (3.1.7-x86-mingw32)
-    bootstrap-slider-rails (1.9.0)
-      railties (>= 3.2, < 5.0)
     bootstrap_form (2.1.1)
     builder (3.1.4)
     coderay (1.1.0)
@@ -141,7 +139,6 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
-  bootstrap-slider-rails
   bootstrap_form
   coffee-rails (~> 4.0.0)
   d3_rails

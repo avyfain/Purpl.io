@@ -2,37 +2,7 @@
 	<br><br>
 	<div class = "row">
 		<div class = "col-md-12">
-		<select id = "courseOne" class="multiselect" size="5">
-				<% @courses.each do |course| %>
-				<option value=<%= course[1] %>><%= course[0] %></option>
-				<% end %>
-			</select>
-		</div>
-	</div>
-	<br><br>
-	<div class = "row">
-		<div class = "col-md-12">
-			<select id = "courseTwo" class="multiselect" size="5">
-				<% @courses.each do |course| %>
-				<option value=<%= course[1] %>><%= course[0] %></option>
-				<% end %>
-			</select>
-		</div>
-	</div>
-	<br><br>
-	<div class = "row">
-		<div class = "col-md-12">
-			<select id = "courseThree" class="multiselect" size="5">
-				<% @courses.each do |course| %>
-				<option value=<%= course[1] %>><%= course[0] %></option>
-				<% end %>
-			</select>
-		</div>
-	</div>
-	<br><br>
-	<div class = "row">
-		<div class = "col-md-12">
-			<select id = "courseFour" class="multiselect" size="5">
+		<select id = "courseArr" class="multiselect" multiple = "multiple" size="5">
 				<% @courses.each do |course| %>
 				<option value=<%= course[1] %>><%= course[0] %></option>
 				<% end %>
@@ -44,13 +14,16 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$('.submit-courses').on("click", function(e){
+			courses = $('#courseArr').val()
+			console.log("here");
 			e.preventDefault();
 			$.ajax({
 				url: "/students/" + <%= current_student.id %> + "/add_courses",
 				dataType: "json",
 				type: "POST",
-				data: { course1: $('#courseOne').val(), course2: $('#courseTwo').val(), course3: $('#courseThree').val(), course4: $('#courseFour').val() },
+				data: { course1: courses[0], course2: courses[1], course3: courses[2], course4: courses[3] },
 				success: function(data) {
 					window.location.href = '/students/' + <%= current_student.id %>
 				}
