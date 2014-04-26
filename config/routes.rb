@@ -8,7 +8,7 @@ NUClass::Application.routes.draw do
     end
   end
 
-  root to: "sessions#new"
+  # root to: "sessions#new"
 
   resources :courses do
     resources :questions

@@ -4,6 +4,10 @@ class StudentsController < ApplicationController
 		@student = Student.find(params[:id])
 	end
 
+	def edit
+		@student = Student.find(params[:id])
+	end
+
 	def index
 		@students = Student.all
 	end
@@ -27,8 +31,8 @@ class StudentsController < ApplicationController
 
 		respond_to do |format|
 			if @student.save
-				format.html { redirect_to @student, notice: 'User was successfully created.' }
-				format.json { render action: 'show', status: :created, location: @user }
+				format.html { redirect_to @student, notice: 'Student was successfully created.' }
+				format.json { render action: 'show', status: :created, location: @student }
 			else
 				format.html { render action: 'new' }
 				format.json { render json: @student.errors, status: :unprocessable_entity }
@@ -41,9 +45,34 @@ class StudentsController < ApplicationController
 	end
 
 	def schedule
+		#this is the view
+
+		@courses = Course.all.sort_by{|x| [x.subject, x.catalog_number]}
+
+		@courses = @courses.map do |c|
+			["#{c.subject} #{c.catalog_number}: #{c.title}", c.id]
+		end
+
+		#["EECS 311: Macrocomputation", 5]
 	end
 
 	def add_courses
+		#this is the postx
+1
+		@student = Student.find(params[:id])
+		@student.courses.push(Course.find(params["course1"]), Course.find(params["course2"]), Course.find(params["course3"]), Course.find(params["course4"]))
+
+		respond_to do |format|
+	      if @student.save
+	        format.html { redirect_to @student, notice: 'Courses were successfully updated.' }
+	        format.json { head :no_content }
+	      else
+	        format.html { render action: 'edit' }
+	        format.json { render json: @student.errors, status: :unprocessable_entity }
+	      end
+	    end
+
+		# params[:courses].each { c = C.find_by(id), current_student.courses << c }
 	end
 
 	   # Never trust parameters from the scary internet, only allow the white list through.
