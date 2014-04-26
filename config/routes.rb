@@ -3,6 +3,9 @@ NUClass::Application.routes.draw do
   resources :courses do
     resources :survey_results 
     resources :questions do
+      member do
+        post "add_upvote", to: "questions#add_upvote"
+      end
       resources :answers, only: [:create]
     end
   end

@@ -64,17 +64,17 @@
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
 							<% if question.read?(current_student ? current_student : current_professor) %>
-							<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+								<p class = "question"><span class="q-id-upvote-<%=question.id %>" style="font-size:40px;font-weight:700;position:relative;top:8px;cursor:pointer">^&nbsp;</span><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
 							<% else %>
-							<strong>
-								<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-							</strong>
+								<strong>
+									<p class = "question"><span class="q-id-upvote-<%=question.id %>" style="font-size:35px;font-weight:700;position:relative;top:8px;cursor:pointer">^&nbsp;</span><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+								</strong>
 							<% end %>
 						</div>
 					</div>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+							<p class = "question_info"><span id="upvotes-<%=question.id%>"><%= question.upvotes.count %></span> Upvotes | by <%= "#{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago" %> </p>
 						</div>
 					</div>
 					<div class = "row">
@@ -83,7 +83,25 @@
 							</div>
 						</div>
 					</div>
-					<% end %>
+
+					<script>
+
+					$(".q-id-upvote-<%= question.id%>").on("click", function(){
+						$.ajax({
+							url: "/courses/" + <%= question.course_id %> + "/questions/" + <%= question.id %> + "/add_upvote",
+							dataType: "json",
+							type: "POST",
+							done: function(data) {
+								console.log(data);
+							}
+						})
+
+						var upvotes = $('#upvotes-<%=question.id%>').html();
+						$('#upvotes-<%=question.id%>').html(parseInt(upvotes) + 1)
+					})
+
+					</script>
+				<% end %>
 				<% end %>
 				</div>
 			<% end %>

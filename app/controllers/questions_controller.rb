@@ -61,5 +61,21 @@ class QuestionsController < ApplicationController
   def destroy
   end
 
+  def add_upvote
+    @upvote = Upvote.find_by(question_id: params[:id], student_id: current_student.id)
+
+
+      if @upvote.nil?
+
+      @upvote = Upvote.new(question_id: params[:id], student_id: current_student.id)
+      @upvote.save
+
+      respond_to do |format|
+        format.json { render json: @upvote }
+      end
+
+    end
+  end
+
 
 end
