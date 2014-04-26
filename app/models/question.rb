@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   belongs_to :course
 
   def time_thing
-    t = (Question.last.answers.any? ? Question.last.answers.last.created_at : Question.last.created_at)
+    t = (self.answers.any? ? self.answers.last.created_at : self.created_at)
   end
 
   def read? user
