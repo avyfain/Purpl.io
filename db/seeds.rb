@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-terms = ['4520','4530','4540']
+terms = ['4540']
 
 subject_response = HTTParty.get('http://vazzak2.ci.northwestern.edu/subjects/').body
 subject_array = JSON.parse(subject_response)
