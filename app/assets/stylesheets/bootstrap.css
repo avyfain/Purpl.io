@@ -5603,7 +5603,7 @@ button.close {
   animation: pop 0.6s ease-out 0.5s both;
   opacity: 1 \9;
 }
-@-webkit-keyframes pop {
+/*@-webkit-keyframes pop {
   0% {
     -webkit-transform: scale(1, );
     -ms-transform: scale(1, );
@@ -5690,7 +5690,7 @@ button.close {
   -ms-transform: scale(1, );
   transform: scale(1, );
   opacity: 1;
-}
+}*/
 .effect-perspective {
   -webkit-perspective: 1300px;
   -moz-perspective: 1300px;
