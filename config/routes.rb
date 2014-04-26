@@ -7,11 +7,8 @@ NUClass::Application.routes.draw do
     end
   end
 
-<<<<<<< HEAD
   # root to: "sessions#new"
 
-=======
->>>>>>> 703be7b5a77e707158bdba78835f77ff233100f0
   resources :courses do
     resources :questions
     resources :survey_results 
