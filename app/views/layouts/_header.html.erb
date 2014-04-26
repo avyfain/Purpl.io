@@ -44,7 +44,18 @@
       </form>
        -->
        <ul class="nav navbar-nav navbar-right">
-        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Reviews<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+              <% if current_professor %>
+              <%current_professor.courses.each do |c| %>
+                <li><%= link_to "#{c.subject}-#{c.catalog_number}",  course_survey_results_path(c.id) %></li>
+              <% end %>
+              <% end %>
+          </ul>
+        </li>
+
+
         <!-- <li class="dropdown"> -->
           <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a> -->
           <!-- <ul class="dropdown-menu"> -->

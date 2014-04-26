@@ -2,10 +2,10 @@ class ProfessorsController < ApplicationController
 
 	def show
 		@professor = Professor.find(params[:id])
-		@course1 = @professor.courses[0]
-		@course2 = @professor.courses[1]
-		@course3 = @professor.courses[2]
-		@course4 = @professor.courses[3]
+		# @course1 = @professor.courses[0]
+		# @course2 = @professor.courses[1]
+		# @course3 = @professor.courses[2]
+		# @course4 = @professor.courses[3]
     # @questions = Question.where(course_id: @course.id)
 	end
 
