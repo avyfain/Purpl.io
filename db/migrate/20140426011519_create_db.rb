@@ -46,7 +46,7 @@ class CreateDb < ActiveRecord::Migration
       t.belongs_to :student
     end
 
-
+    
 
   end
 end
