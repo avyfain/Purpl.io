@@ -1,0 +1,31 @@
+<div class = "container ">
+	<% @students.each do |student| %>
+	<div class = "row posting-inner">
+		<div class = "col-md-offset-3 col-md-6 posting">
+			<br>
+			<div class = "row ">
+				<div class = "col-md-12">
+					<h1><%= student.email %></h1>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-md-12">
+					<b><p>Contact: <%= student.major %></p></b>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-md-10">
+					<p><%= student.year %></p>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-md-offset-10 col-md-2">
+					<%= link_to 'Show', student, :class => "btn btn-default", :type => "button", :method => :get  %>
+				</div>
+				<br><br><br>
+			</div>
+		</div>
+	</div>
+	<br><br>
+	<% end %>
+</div>

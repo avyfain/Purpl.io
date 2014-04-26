@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Classtime:</strong>
+  <%= @survey_result.classtime %>
+</p>
+
+<p>
+  <strong>Homework:</strong>
+  <%= @survey_result.homework %>
+</p>
+
+<p>
+  <strong>Midterm:</strong>
+  <%= @survey_result.midterm %>
+</p>
+
+<p>
+  <strong>Workload:</strong>
+  <%= @survey_result.workload %>
+</p>
+
+<p>
+  <strong>Material:</strong>
+  <%= @survey_result.material %>
+</p>
+
+<p>
+  <strong>Pace:</strong>
+  <%= @survey_result.pace %>
+</p>
+
+<p>
+  <strong>Passion:</strong>
+  <%= @survey_result.passion %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @survey_result.other %>
+</p>
+
+<%= link_to 'Edit', edit_survey_result_path(@survey_result) %> |
+<%= link_to 'Back', survey_results_path %>

@@ -77,4 +77,19 @@ ActiveRecord::Schema.define(version: 20140426105712) do
     t.string   "first_name"
   end
 
+  create_table "survey_results", force: true do |t|
+    t.string   "classtime"
+    t.string   "homework"
+    t.string   "midterm"
+    t.string   "workload"
+    t.string   "material"
+    t.string   "pace"
+    t.string   "passion"
+    t.text     "other"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "student_id"
+    t.integer  "course_id"
+  end
+
 end

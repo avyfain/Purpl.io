@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 well" >
+
+    <%= bootstrap_form_for [@course, @survey_result] do |f| %>
+      <% if @survey_result.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@survey_result.errors.count, "error") %> prohibited this survey_result from being saved:</h2>
+
+          <ul>
+          <% @survey_result.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group" id="form-data">
+        <%= f.form_group :classtime, label: { text: "Class time is used productively." } do %>
+          <%= f.radio_button :classtime, "yes", label: "Yes"%>
+          <%= f.radio_button :classtime, "neutral", label: "Neutral"%>
+          <%= f.radio_button :classtime, "no", label: "No" %>
+        <% end %>
+      </br>
+
+        <%= f.form_group :homework, label: { text: "Homework assignments are conducive to relevant learning." } do %>
+          <%= f.radio_button :homework, "yes", label: "Yes"%>
+          <%= f.radio_button :homework, "neutral", label: "Neutral"%>
+          <%= f.radio_button :homework, "no", label: "No" %>
+        <% end %>
+      </br>
+        <%= f.form_group :midterm, label: { text: "The midterm focused on relevant class material." } do %>
+          <%= f.radio_button :midterm, "yes", label: "Yes"%>
+          <%= f.radio_button :midterm, "neutral", label: "Neutral"%>
+          <%= f.radio_button :midterm, "no", label: "No" %>
+        <% end %>
+      </br>
+        <%= f.form_group :workload, label: { text: "The weekly workload is acceptable" } do %>
+          <%= f.radio_button :workload, "yes", label: "Yes"%>
+          <%= f.radio_button :workload, "neutral", label: "Neutral"%>
+          <%= f.radio_button :workload, "no", label: "No" %>
+        <% end %>
+      </br>
+        <%= f.form_group :material, label: { text: "The class material (lectures, books, etc.) is useful and easily available." } do %>
+          <%= f.radio_button :material, "yes", label: "Yes"%>
+          <%= f.radio_button :material, "neutral", label: "Neutral"%>
+          <%= f.radio_button :material, "no", label: "No" %>
+        <% end %>
+      </br>
+        <%= f.form_group :pace, label: { text: "The course pace is" } do %>
+          <%= f.radio_button :pace, "slow", label: "Too Slow" %>
+          <%= f.radio_button :pace, "adequate", label: "Adequate"%>
+          <%= f.radio_button :pace, "fast", label: "Too Fast" %>
+        <% end %>
+      </br>
+        <%= f.form_group :passion, label: { text: "The instructor is passionate about teaching the course." } do %>
+          <%= f.radio_button :passion, "yes", label: "Yes"%>
+          <%= f.radio_button :passion, "neutral", label: "Neutral"%>
+          <%= f.radio_button :passion, "no", label: "No" %>
+        <% end %>
+      </br>
+
+      <!-- Missing current_user.id hidden field -->
+      <%= f.hidden_field :course_id, :value => params[@course.id]  %>
+      <%= f.text_area :other, label: "Other", rows:"3" %>
+        <%= f.submit "Submit Feedback", class: "btn btn-large btn-primary" %>
+      <% end %>
+    </div>
+</div>
+</div>
