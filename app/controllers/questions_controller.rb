@@ -15,8 +15,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
+
     q = Question.new
-    q.text = params["question"]["text"]
+    q.text = params["text"]
 
     session[:student_id] = 1
     q.student_id = current_student.id

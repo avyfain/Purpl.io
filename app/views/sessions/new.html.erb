@@ -1,3 +1,5 @@
+<img id = "background" src = "http://upload.wikimedia.org/wikipedia/commons/9/9c/Student_Union_%26_University_Library,_Northwestern.JPG">
+
 <div class="container">
     <h1 class="CA_Title">
         Virtual CA
@@ -31,11 +33,14 @@
 	text-align: right;
 }
 
-body{
-    background: url(http://upload.wikimedia.org/wikipedia/commons/9/9c/Student_Union_%26_University_Library,_Northwestern.JPG);
-    background-size: 100%;
-    background-position: center top;  
-    background-repeat: no-repeat;
+#background {
+    position: fixed;
+    z-index: -1;
+    width: 120%;
+    left: -10%;
+    -webkit-filter: blur(4px) brightness(1.1);
+    -ms-filter: blur(4px) brightness(1.1);
+    filter: blur(4px) brightness(1.1);
 }
 
 .vertical-offset-100{
@@ -47,4 +52,5 @@ body{
 	font-size: 300%;
 	padding-top:10px;
 }
+
 </style>
