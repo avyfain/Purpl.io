@@ -3,9 +3,9 @@ NUClass::Application.routes.draw do
 
 
   resources :courses do
+    resources :survey_results 
     resources :questions do
       resources :answers, only: [:create]
-      resources :survey_results 
     end
   end
 
