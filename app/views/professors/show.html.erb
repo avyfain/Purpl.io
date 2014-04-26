@@ -3,7 +3,7 @@
 </div>
 
 
-<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @professor.courses.first.subject+' '+@professor.courses.first.catalog_number %></button>
+<button id = "askQuestion" class = "btn btn-custom-lighten" data-toggle="modal" data-target="#myModal">Ask a question in <%= @professor.courses.first.subject+' '+@professor.courses.first.catalog_number %></button>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -20,7 +20,7 @@
 
       </div>
       <div class="modal-footer">
-		<%= submit_tag("Submit", class: "form-control btn btn-primary new-question-submit")%>
+		<%= submit_tag("Submit", class: "form-control btn btn-custom-lighten new-question-submit")%>
 		<% end %>
       </div>
     </div><!-- /.modal-content -->
@@ -169,7 +169,7 @@
 	}
 
 	.nav {
-		background-color: rgba(87, 136, 232, .5);
+		background-color: rgba(66, 36, 96, .5);
 	}
 
 	#newsfeed {
