@@ -20,3 +20,92 @@
   <% end %>
 <% end %>
 
+
+
+
+<!--___________________-->
+
+<div id = "newsfeed" class = "row">
+  <div class = "col-md-12">
+    <br>
+    <ul class="nav nav-pills">
+      <% @course = c %>
+      <li class = "active">
+        <a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab">
+          <%= c.subject+' '+c.catalog_number %>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <% @course = c %>
+      <div class="tab-pane active" id="<%= c.id.to_s %>">
+      <% if c.questions.empty? %>
+      <div class = "row">
+        <div class = "col-md-10 col-md-offset-1">
+          <br><br>
+            <p class = "question">There are no questions posted for this course yet.</p>
+        </div>
+      </div>
+      <% else %>
+
+        <% @question = question %>
+        <br><br>
+          <div class = "row">
+            <div class = "col-md-10 col-md-offset-1">
+              <% if question.read?(current_student ? current_student : current_professor) %>
+              <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+              <% else %>
+              <strong>
+                <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+              </strong>
+              <% end %>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-10 col-md-offset-1">
+              <p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-6 col-md-offset-1">
+              <div class = "row" id = "line">
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <% @answer.each() do |question| %>
+        <br><br>
+          <div class = "row">
+            <div class = "col-md-10 col-md-offset-1">
+              <% if question.read?(current_student ? current_student : current_professor) %>
+              <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+              <% else %>
+              <strong>
+                <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+              </strong>
+              <% end %>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-10 col-md-offset-1">
+              <p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-6 col-md-offset-1">
+              <div class = "row" id = "line">
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

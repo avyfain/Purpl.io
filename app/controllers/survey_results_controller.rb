@@ -38,9 +38,12 @@ class SurveyResultsController < ApplicationController
   def create
     @survey_result = SurveyResult.new(survey_result_params)
 
+    @survey_result.student_id = current_student.id
+    @survey_result.course_id = params["course_id"]
+
     respond_to do |format|
       if @survey_result.save
-        format.html { redirect_to course_path(params[:course_id]), notice: 'Survey result was successfully created.' }
+        format.html { redirect_to student_path(current_student.id), notice: 'Survey result was successfully created.' }
         format.json { render action: 'show', status: :created, location: @survey_result }
       else
         format.html { render action: 'new' }
