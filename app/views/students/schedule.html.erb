@@ -1,0 +1,67 @@
+<form role = "form">
+	<br><br>
+	<div class = "row">
+		<div class = "col-md-12">
+		<select id = "courseOne" class="multiselect" size="5">
+				<% @courses.each do |course| %>
+				<option value=<%= course[1] %>><%= course[0] %></option>
+				<% end %>
+			</select>
+		</div>
+	</div>
+	<br><br>
+	<div class = "row">
+		<div class = "col-md-12">
+			<select id = "courseTwo" class="multiselect" size="5">
+				<% @courses.each do |course| %>
+				<option value=<%= course[1] %>><%= course[0] %></option>
+				<% end %>
+			</select>
+		</div>
+	</div>
+	<br><br>
+	<div class = "row">
+		<div class = "col-md-12">
+			<select id = "courseThree" class="multiselect" size="5">
+				<% @courses.each do |course| %>
+				<option value=<%= course[1] %>><%= course[0] %></option>
+				<% end %>
+			</select>
+		</div>
+	</div>
+	<br><br>
+	<div class = "row">
+		<div class = "col-md-12">
+			<select id = "courseFour" class="multiselect" size="5">
+				<% @courses.each do |course| %>
+				<option value=<%= course[1] %>><%= course[0] %></option>
+				<% end %>
+			</select>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-default submit-courses">Submit</button>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.submit-courses').on("click", function(e){
+			e.preventDefault();
+			$.ajax({
+				url: "/students/" + <%= current_student.id %> + "/add_courses",
+				dataType: "json",
+				type: "POST",
+				data: { course1: $('#courseOne').val(), course2: $('#courseTwo').val(), course3: $('#courseThree').val(), course4: $('#courseFour').val() },
+				success: function(data) {
+					window.location.href = '/students/' + <%= current_student.id %>
+				}
+			})
+		})
+
+		$('.multiselect').multiselect({
+			maxHeight: 200,
+			enableFiltering: true,
+			enableCaseInsensitiveFiltering: true,
+			numberDisplayed: 2
+		});
+	});
+</script>

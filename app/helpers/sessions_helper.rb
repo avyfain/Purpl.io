@@ -1,11 +1,11 @@
 module SessionsHelper
 
-  def log_in!(user)
-    session[:user_id] = user.id
+  def log_in!(student)
+    session[:student_id] = student.id
   end
   
   def logged_in?
-    session[:user_id].present?
+    session[:student_id].present?
   end
 
   def authenticated!
@@ -14,12 +14,12 @@ module SessionsHelper
     end
   end
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+  def current_student
+    @current_student ||= Student.find_by(id: session[:student_id])
   end
 
-  def current_user?(user)
-    @current_user == user
+  def current_student?(student)
+    @current_student == student
   end
 
 end
