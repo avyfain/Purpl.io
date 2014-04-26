@@ -1,6 +1,4 @@
 NUClass::Application.routes.draw do
-  
-
 
   resources :courses do
     resources :survey_results 
@@ -16,13 +14,17 @@ NUClass::Application.routes.draw do
     end
   end
 
+  resources :professors do
+    member do
+      get "schedule", to: "professor#schedule"
+      post "add_courses", to: "professor#add_courses"
+    end
+  end
+
+
   # root to: "sessions#new"
 
- 
-
   resource :session
-
-
 
 root 'sessions#new'
 
