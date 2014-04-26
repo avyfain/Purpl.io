@@ -7,6 +7,9 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @course = Course.find(params["course_id"])
+    @answers = Answer.where(question_id: @question.id).sort_by { |a| [ a.student_id ? 0 : 1, a.created_at] }.reverse
+    @new_answer = Answer.new
 
     survey = SurveyResult.find_by(student_id: current_student.id, course_id: @question.course_id)
 
