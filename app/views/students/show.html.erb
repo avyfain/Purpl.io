@@ -2,9 +2,6 @@
 	<img class = "img-responsive" src = "https://farm8.staticflickr.com/7340/9036889381_e6b35a7724_k.jpg">
 </div>
 
-
-<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -27,8 +24,9 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<h1>Courses Page</h1>
+<h1 class = "pull-left">Courses Page</h1>
 
+<button id = "askQuestion" class = "btn btn-primary" data-toggle="modal" data-target="#myModal">Ask a question in <%= @student.courses.first.subject+' '+@student.courses.first.catalog_number %></button>
 
 <div id = "newsfeed" class = "row">
 	<div class = "col-md-12">
@@ -205,9 +203,9 @@
 	}
 
 	#askQuestion {
-		position: fixed;
-		left: 75%;
-		top: 80%;
+		position: absolute;
+		left: 70%;
+		top: 60%;
 		z-index: 1;
 	}
 	
