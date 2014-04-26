@@ -7,15 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-terms = ['4520','4530','4540']
+terms = ['4540']
 
-subject_response = HTTParty.get('http://vazzak2.ci.northwestern.edu/subjects/').body
-subject_array = JSON.parse(subject_response)
-subjects = []
+# subject_response = HTTParty.get('http://vazzak2.ci.northwestern.edu/subjects/').body
+# subject_array = JSON.parse(subject_response)
+# subjects = []
 
-for s in subject_array
-	subjects << s["symbol"]
-end
+
+
+subjects = ["EECS" , "MATH" , "ECON"]
 
 for t in terms 
 	for s in subjects
