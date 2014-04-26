@@ -1,3 +1,7 @@
+Description
+
+An application to connect students in common classes to facilitate reviews and discussions regarding aspects of the class such as assignments, tests, and overall experience.Lo
+
 Feature Story
 
 Login
