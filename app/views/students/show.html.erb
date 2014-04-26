@@ -22,12 +22,25 @@
 		<div class="tab-content">
 			<% @student.courses.each do |c| %>
 				<div class = "tab-pane" id="<%= c.subject+c.catalog_number %>">
-
+				<% if c.questions.empty? %>
+					<div class = "row">
+						<div class = "col-md-10 col-md-offset-1">
+							<br><br>
+							<p class = "question">There are no questions posted for this course yet.</p>
+						</div>
+					</div>
+				<% else %>
 				<% for question in c.questions %>
 					<br><br>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+							<% if question.read?(current_student ? current_student : current_professor) %>
+								<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+							<% else %>
+								<strong>
+									<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+								</strong>
+							<% end %>
 						</div>
 					</div>
 					<div class = "row">
@@ -41,6 +54,7 @@
 							</div>
 						</div>
 					</div>
+				<% end %>
 				<% end %>
 				</div>
 			<% end %>
