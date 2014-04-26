@@ -41,7 +41,7 @@
 			<% if (i > 0) %>
 			<li>
 			<% end %>
-				<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.subject+c.catalog_number %>" data-toggle = "tab">
+				<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab">
 					<%= c.subject+' '+c.catalog_number %>
 				</a>
 			</li>
@@ -52,10 +52,10 @@
 		<div class="tab-content">
 			<% @student.courses.each_with_index do |c, i| %>
 				<% if (i == 0) %>
-				<div class = "tab-pane active" id="<%= c.subject+c.catalog_number %>">
+				<div class="tab-pane active" id="<%= c.id.to_s %>">
 				<% end %>
 				<% if (i > 0) %>
-				<div class = "tab-pane" id="<%= c.subject+c.catalog_number %>">
+				<div class="tab-pane" id="<%= c.id.to_s %>">
 				<% end %>
 				<% if c.questions.empty? %>
 					<div class = "row">
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				<% else %>
-				<% for question in c.questions %>
+				<% for question in c.questions.sort_by { |q| q.created_at }.reverse %>
 					<br><br>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
@@ -103,6 +103,18 @@
 		url_string = null;
 		courseid = null;
 
+		num = window.location.search.split("=")[1];
+
+
+		if (num == undefined) {
+		} else {
+			$(".course_id_"+<%=@student.courses.first.id%>).parent().attr('class', '');
+			$("#"+"<%=@student.courses.first.id.to_s%>").attr('class', 'tab-pane');
+
+			$(".course_id_"+num).parent().attr('class', 'active');
+			$("#"+num).attr('class', 'tab-pane active')
+		}
+
 		$('.pill').on("click", function(e){
 			question_button = $('#askQuestion').html().split(" ");
 			question_button.pop();
@@ -139,9 +151,7 @@
 				data: { text: $('#text').val(), course_id: courseid},
 				success: function(data) {
 					$('#myModal').modal('toggle');
-					bootbox.alert("Your question has been posted!");
-					console.log('hello');
-				}
+					window.location.href = '/students/'+<%= @student.id %>+ '?num=' + courseid;				}
 			})
 		})
 	}
