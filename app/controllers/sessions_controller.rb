@@ -14,6 +14,10 @@ class SessionsController < ApplicationController
       else
         redirect_to student_path(student)
       end
+    elsif prof = Professor.find_by(email: params[:email])
+      log_in!(prof)
+
+      redirect_to professor_path(prof)
     else
       @message = "Sorry, either the email address or password you entered was incorrect. Try again:"
       render :new
