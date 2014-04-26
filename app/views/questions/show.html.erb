@@ -1,111 +1,155 @@
-<%= @question.text %>
-
-<%= form_tag course_question_answers_path(@question.course_id, @question.id) do %>
-  
-  <%= text_field_tag "answer", nil, placeholder: "Your answer", class: "form-control" %>
-  <%= submit_tag "Add Answer", class: "btn btn-primary" %>
-
-<% end %>
-
-<% if @answers.any? %>
-  <% @answers.each do |a| %>
-
-    <p><%= a.text %></p>
-
-    <% if a.student_id %>
-      <p><%= Student.find(a.student_id).first_name %> : <%= time_ago_in_words(a.created_at) %> ago</p>
-    <% else %>
-      <p><%= Professor.find(a.professor_id).name %> : <%= time_ago_in_words(a.created_at) %> ago</p>
-    <% end %>
-  <% end %>
-<% end %>
-
-
-
-
 <!--___________________-->
-
 <div id = "newsfeed" class = "row">
-  <div class = "col-md-12">
-    <br>
-    <ul class="nav nav-pills">
-      <% @course = c %>
-      <li class = "active">
-        <a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab">
-          <%= c.subject+' '+c.catalog_number %>
-        </a>
-      </li>
-      <% end %>
-    </ul>
-  </div>
+	<div class = "col-md-12">
+		<br>
+		<ul class="nav nav-pills">
+			<% c = @course %>
+			<li class = "active">
+				<a class = "pill course_id_<%= c.id %>" href="<%= '#'+c.id.to_s %>" data-toggle = "tab">
+					<%= c.subject+' '+c.catalog_number %>
+				</a>
+			</li>
+		</ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <% @course = c %>
-      <div class="tab-pane active" id="<%= c.id.to_s %>">
-      <% if c.questions.empty? %>
-      <div class = "row">
-        <div class = "col-md-10 col-md-offset-1">
-          <br><br>
-            <p class = "question">There are no questions posted for this course yet.</p>
-        </div>
-      </div>
-      <% else %>
 
-        <% @question = question %>
-        <br><br>
-          <div class = "row">
-            <div class = "col-md-10 col-md-offset-1">
-              <% if question.read?(current_student ? current_student : current_professor) %>
-              <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-              <% else %>
-              <strong>
-                <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-              </strong>
-              <% end %>
-            </div>
-          </div>
-          <div class = "row">
-            <div class = "col-md-10 col-md-offset-1">
-              <p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
-            </div>
-          </div>
-          <div class = "row">
-            <div class = "col-md-6 col-md-offset-1">
-              <div class = "row" id = "line">
-              </div>
-            </div>
-          </div>
-        <% end %>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<% c = @course %>
+			<div class="tab-pane active" id="<%= c.id.to_s %>">
+				<% if c.questions.empty? %>
+				<div class = "row">
+					<div class = "col-md-10 col-md-offset-1">
+						<br><br>
+						<p class = "question">There are no questions posted for this course yet.</p>
+					</div>
+				</div>
+				<% else %>
+				<div class = "row">
+					<div class = "col-md-7">
+						<% question = @question %>
+						<br><br>
+						<div class = "row">
+							<div class = "col-md-12">
+								<strong>
+									<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
+								</strong>
+							</div>
+						</div>
+						<div class = "row">
+							<div class = "col-md-12">
+								<p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+							</div>
+						</div>
+						<div class = "row">
+							<div class = "col-md-8">
+								<div class = "row" id = "line">
+								</div>
+							</div>
+						</div>
+						<% @answers.each() do |a| %>
+						<br><br>
+						<div class = "row">
+							<div class = "col-md-11 col-md-offset-1">
+								<p class = "a"><%= a.text %></p>
+							</div>
+						</div>
+						<div class = "row">
+							<div class = "col-md-11 col-md-offset-1">
+								<p class = "question_info"><%= "13 Upvotes | by #{ Student.find(a.student_id).first_name} | #{ time_ago_in_words(a.time_thing)} ago" %> </p>
+							</div>
+						</div>
+						<div class = "row">
+							<div class = "col-md-7 col-md-offset-1">
+								<div class = "row" id = "line">
+								</div>
+							</div>
+						</div>
+						<% end %>
+					</div>
+					<div class = "col-md-5">
+						<br><br><br><br><br><br>
+						<%= form_tag course_question_answers_path(@question.course_id, @question.id) do %>
 
-        <% @answer.each() do |question| %>
-        <br><br>
-          <div class = "row">
-            <div class = "col-md-10 col-md-offset-1">
-              <% if question.read?(current_student ? current_student : current_professor) %>
-              <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-              <% else %>
-              <strong>
-                <p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
-              </strong>
-              <% end %>
-            </div>
-          </div>
-          <div class = "row">
-            <div class = "col-md-10 col-md-offset-1">
-              <p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
-            </div>
-          </div>
-          <div class = "row">
-            <div class = "col-md-6 col-md-offset-1">
-              <div class = "row" id = "line">
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      </div>
-    <% end %>
-    </div>
-  </div>
+						<%= text_field_tag "answer", nil, placeholder: "Your answer", class: "form-control", id: "textbox" %>
+						<br><br>
+						<%= submit_tag "Add Answer", class: "btn btn-primary pull-left", id: "textbutton" %>
+
+						<% end %>
+
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
 </div>
+
+<style>
+	#line {
+		border-left: 1px solid #000;
+		border-right: 1px solid #000;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+	}
+
+	.pill {
+		line-height: 250%;
+		font-size: 250%;
+		color: black;
+	}
+
+	.nav {
+		background-color: rgba(87, 136, 232, .5);
+	}
+
+	#newsfeed {
+		border-radius: 1%;
+		background-color: rgba(255, 255, 255, .8);
+	}
+
+	.tab-pane {
+		min-height: 350px;
+		max-height: 350px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+
+	}
+
+	.question {
+		font-size: 200%;
+		line-height: 150%;
+	}
+
+	.question_info {
+		font-size: 100%;
+		line-height: 150%;
+	}
+
+	#askQuestion {
+		position: fixed;
+		left: 75%;
+		top: 80%;
+		z-index: 1;
+	}
+
+	#textbox {
+		min-height: 10em;
+		position: fixed;
+		max-width: 30%;
+	}
+
+	#textbutton {
+		position: fixed;
+		top: 450px;
+	}
+
+	#background {
+		position: fixed;
+		z-index: -1;
+		width: 120%;
+		left: -10%;
+		-webkit-filter: blur(4px) brightness(1.1);
+		-ms-filter: blur(4px) brightness(1.1);
+		filter: blur(4px) brightness(1.1);
+	}
+</style>

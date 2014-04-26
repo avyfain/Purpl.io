@@ -80,7 +80,7 @@
 					</div>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Professor.find(question.professor_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
+							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
 						</div>
 					</div>
 					<div class = "row">

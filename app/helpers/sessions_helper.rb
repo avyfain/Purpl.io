@@ -1,9 +1,14 @@
 module SessionsHelper
 
 
-  def log_in!(student)
-    session[:student_id] = student.id
+  def log_in!(user)
+    if user.is_a? Student
+      session[:student_id] = user.id
+    else
+      session[:professor_id] = user.id
+    end
   end
+
   
   def logged_in?
     session[:student_id].present?
