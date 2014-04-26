@@ -5,6 +5,17 @@ class SurveyResultsController < ApplicationController
   # GET /survey_results.json
   def index
     @survey_results = SurveyResult.all
+    @course = Course.find(params[:course_id])
+
+    @questions = [
+                  ["classtime","Class time is used productively."],
+                  ["homework","Homework assignments are conducive to relevant learning."],
+                  ["midterm","The midterm focused on relevant class material."],
+                  ["workload","The weekly workload is acceptable"],
+                  ["material","The class material (lectures, books, etc.) is useful and easily available."],
+                  ["pace","The course pace is"],
+                  ["passion","The instructor is passionate about teaching the course."]
+                  ]
   end
 
   # GET /survey_results/1
@@ -29,7 +40,7 @@ class SurveyResultsController < ApplicationController
 
     respond_to do |format|
       if @survey_result.save
-        format.html { redirect_to @survey_result, notice: 'Survey result was successfully created.' }
+        format.html { redirect_to @course, notice: 'Survey result was successfully created.' }
         format.json { render action: 'show', status: :created, location: @survey_result }
       else
         format.html { render action: 'new' }

@@ -1,4 +1,129 @@
-<h1>Survey Answers</h1>
+<h1>Course Survey Summary</h1>
+<h2> <%= "#{@course.subject}-#{@course.catalog_number}, #{@course.term}" %> </h2>
+
+<h3>Overall Impression:</h3>
+<p>Number of students who have taken the survey: 10</p>
+
+<script type="text/javascript">
+  var score = 0;
+</script>
+
+<table class="table">
+
+<% [(0..3).to_a, (4..7).to_a].each do |arr| %>
+
+<tr>
+
+  <% arr.each do |index| %>
+
+  <% if index == 0 %>
+  <th>Overall Score:</th>
+    <td style="font-size:100px;" id="smiley">
+      </td>
+  <% else %>
+    <% index -= 1 %>
+
+<th>
+  <p><%=@questions[index][1]%></p>
+</th>
+<td>
+  <div id="<%=@questions[index][0]%>"></div>
+</td>
+  <script type="text/javascript">
+
+        //Width and height
+        var w = 150;
+        var h = 300;
+        var barPadding = 1;
+        
+        var dataset = [];
+        var arrayMax = 3;
+        var limit = 25;
+        var total = 0;
+        for (var i = 0; i < arrayMax; i++) {
+          var val = 5 + Math.floor(Math.random()*limit);
+          dataset.push(val);
+          total = total +val;
+        }
+        var score = score + dataset[0]*0.5+dataset[1]*0.8+dataset[2]*1.9
+        
+        //Create SVG element
+        var svg = d3.select("#<%=@questions[index][0]%>")
+              .append("svg")
+              .attr("width", w)
+              .attr("height", h);
+
+        svg.selectAll("rect")
+           .data(dataset)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+              return i * (w / dataset.length);
+           })
+           .attr("y", function(d) {
+              return h - (d * 10);
+           })
+           .attr("width", w / dataset.length - barPadding)
+           .attr("height", function(d) {
+              return d * 10;
+           })
+           .attr("fill", function(d, i) {
+            if (i==0) { return "rgb(200, 0, 0)";}
+            else if (i==1) { return "rgb(150, 150, 150)";}
+            else { return "rgb(0, 200, 100)";}
+           });
+
+        svg.selectAll("text")
+           .data(dataset)
+           .enter()
+           .append("text")
+           .text(function(d) {
+              return Math.round(100*d/total) + "%";
+           })
+           .attr("text-anchor", "middle")
+           .attr("x", function(d, i) {
+              return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+           })
+           .attr("y", function(d) {
+              return h - (d * 10) + 20;
+           })
+           .attr("font-size", "14px")
+           .attr("fill", "white");
+      </script>
+<% end %>
+<% end %>
+</tr>
+<% end%>
+
+</table>
+
+<script type="text/javascript">
+  var score = score/7;
+  var smiley;
+  var smil_text;
+  if (score>70) {
+    smiley = ":D";
+    smil_text = "Yay, your class is awesome!"
+    }
+  else if (score >55) {
+    smiley = ":)";
+    smil_text = "People seem to like your class."
+    }
+  else if (score >45) {
+    smiley = ":|";
+    smil_text = "You should try a bit harder."
+  }
+  else {
+    smiley = ":("
+    smil_text = "Your students are unhappy, do something about it!"
+  }
+  
+  $("#smiley").append('<div style="-webkit-transform:rotate(90deg);">'+smiley+'</div><p>'+ smil_text+'</p>');
+
+
+</script>
+
+<!-- 
 
 <table class="table">
   <thead>
@@ -28,14 +153,11 @@
         <td><%= survey_result.pace %></td>
         <td><%= survey_result.passion %></td>
         <td><%= survey_result.other %></td>
-        <td><%= link_to 'Show', survey_result %></td>
-        <td><%= link_to 'Edit', edit_survey_result_path(survey_result) %></td>
-        <td><%= link_to 'Destroy', survey_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br> 
 
-<%= link_to 'New Survey result', new_survey_result_path %>
+<%= link_to 'New Survey result', new_course_survey_result_path %> -->

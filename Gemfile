@@ -22,6 +22,7 @@ gem 'json', '~> 1.8.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bootstrap_form'
 gem 'bootstrap-slider-rails'
+gem 'd3_rails'
 
 
 group :doc do
