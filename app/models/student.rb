@@ -4,4 +4,6 @@ class Student < ActiveRecord::Base
   has_many :answers
   has_many :questions
 
+  has_secure_password
+
 end
