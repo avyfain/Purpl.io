@@ -19,6 +19,10 @@ module SessionsHelper
     @current_student ||= Student.find_by(id: session[:student_id])
   end
 
+  def current_professor
+    @current_professor ||= Professor.find_by(id: session[:professor_id])
+  end
+
   def current_student?(student)
     @current_student == student
   end

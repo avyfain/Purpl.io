@@ -57,16 +57,16 @@
 				<% if (i > 0) %>
 				<div class = "tab-pane" id="<%= c.subject+c.catalog_number %>">
 				<% end %>
-				<% for i in 0..5 %>
+				<% for question in c.questions %>
 					<br><br>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question">What is the answer to homework 3 problem 2a?</p>
+							<p class = "question"><%= link_to question.text, course_question_path(question.course_id, question.id) %></p>
 						</div>
 					</div>
 					<div class = "row">
 						<div class = "col-md-10 col-md-offset-1">
-							<p class = "question_info">13 Upvotes | by Brian | 2 Comments</p>
+							<p class = "question_info"><%= link_to "13 Upvotes | by #{ Student.find(question.student_id).first_name} | #{ question.answers.count } answers | #{ time_ago_in_words(question.time_thing)} ago", course_question_path(question.course_id, question.id) %> </p>
 						</div>
 					</div>
 					<div class = "row">

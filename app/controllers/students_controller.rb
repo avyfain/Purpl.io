@@ -2,6 +2,11 @@ class StudentsController < ApplicationController
 
 	def show
 		@student = Student.find(params[:id])
+		@course1 = @student.courses[0]
+		@course2 = @student.courses[1]
+		@course3 = @student.courses[2]
+		@course4 = @student.courses[3]
+    # @questions = Question.where(course_id: @course.id)
 	end
 
 	def edit

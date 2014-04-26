@@ -9,6 +9,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answers = Answer.where(question_id: @question.id).sort_by { |a| [ a.student_id ? 0 : 1, a.created_at] }.reverse
     @new_answer = Answer.new
+
+    @question.readmap += (current_student ? current_student.id.to_s + "|" : current_professor.id.to_s + "|")
+    @question.save
   end
 
   def index
@@ -22,6 +25,7 @@ class QuestionsController < ApplicationController
     session[:student_id] = 1
     q.student_id = current_student.id
     q.course_id = params["course_id"]
+    q.readmap = ''
     q.save
 
     redirect_to course_path(params["course_id"])

@@ -8,7 +8,12 @@ class SessionsController < ApplicationController
 
     if student && student.authenticate(params[:password])
       log_in!(student)
-      redirect_to student_path(student)
+
+      if student.courses.empty?
+        redirect_to schedule_student_path(student.id)
+      else
+        redirect_to student_path(student)
+      end
     else
       @message = "Sorry, either the email address or password you entered was incorrect. Try again:"
       render :new
