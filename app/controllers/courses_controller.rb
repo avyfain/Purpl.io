@@ -72,3 +72,4 @@ class CoursesController < ApplicationController
       params[:course]
     end
 end
+
