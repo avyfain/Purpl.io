@@ -1,6 +1,5 @@
 NUClass::Application.routes.draw do
   
-
   resources :students do
     member do
       get "schedule", to: "students#schedule"
@@ -8,10 +7,9 @@ NUClass::Application.routes.draw do
     end
   end
 
-  root to: "sessions#new"
-
   resources :courses do
     resources :questions
+    resources :survey_results 
   end
 
   resource :session

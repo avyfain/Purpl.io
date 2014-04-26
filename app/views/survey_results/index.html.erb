@@ -1,0 +1,41 @@
+<h1>Survey Answers</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Classtime</th>
+      <th>Homework</th>
+      <th>Midterm</th>
+      <th>Workload</th>
+      <th>Material</th>
+      <th>Pace</th>
+      <th>Passion</th>
+      <th>Other</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @survey_results.each do |survey_result| %>
+      <tr>
+        <td><%= survey_result.classtime %></td>
+        <td><%= survey_result.homework %></td>
+        <td><%= survey_result.midterm %></td>
+        <td><%= survey_result.workload %></td>
+        <td><%= survey_result.material %></td>
+        <td><%= survey_result.pace %></td>
+        <td><%= survey_result.passion %></td>
+        <td><%= survey_result.other %></td>
+        <td><%= link_to 'Show', survey_result %></td>
+        <td><%= link_to 'Edit', edit_survey_result_path(survey_result) %></td>
+        <td><%= link_to 'Destroy', survey_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Survey result', new_survey_result_path %>
