@@ -1,9 +1,11 @@
 NUClass::Application.routes.draw do
   
-  root to: "sessions#new"
+  # root to: "sessions#new"
 
   resources :courses do
-    resources :questions
+    resources :questions do
+      resources :answers, only: [:create]
+    end
   end
 
   resource :session

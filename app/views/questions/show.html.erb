@@ -1,0 +1,21 @@
+<%= @question.text %>
+
+<%= form_tag course_question_answers_path(@question.course_id, @question.id) do %>
+  
+  <%= text_field_tag "answer", nil, placeholder: "Your answer", class: "form-control" %>
+  <%= submit_tag "Add Answer", class: "btn btn-primary" %>
+
+<% end %>
+
+<% if @answers.any? %>
+  <% @answers.each do |a| %>
+
+    <p><%= a.text %></p>
+
+    <% if a.student_id %>
+      <p><%= Student.find(a.student_id).first_name %> : <%= time_ago_in_words(a.created_at) %> ago</p>
+    <% else %>
+      <p><%= Professor.find(a.professor_id).name %> : <%= time_ago_in_words(a.created_at) %> ago</p>
+    <% end %>
+  <% end %>
+<% end %>

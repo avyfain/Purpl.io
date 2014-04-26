@@ -1,6 +1,7 @@
-<%= form_for @question do |f| %>
-  <div class="form-group">
-    <%= f.label :text %>
-    <%= f.text_field :text %>
+<%= form_for [@course, @question] do |f| %>
+  <div class="form-group col-sm-4"> 
+    <%= f.label :text, "Question" %>
+    <%= f.text_area :text, class: "form-control" %>
+    <%= f.submit "Submit",  class: "form-control btn btn-primary" %>
   </div>
 <% end %>
