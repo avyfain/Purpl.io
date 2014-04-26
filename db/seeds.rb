@@ -5,3 +5,31 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+terms = ['4520','4530','4540']
+
+subject_response = HTTParty.get('http://vazzak2.ci.northwestern.edu/subjects/').body
+subject_array = JSON.parse(subject_response)
+subjects = []
+
+for s in subject_array
+	subjects << s["symbol"]
+end
+
+for t in terms 
+	for s in subjects
+		course_string = HTTParty.get('http://vazzak2.ci.northwestern.edu/courses/?term='+t+'&subject='+s).body
+		course_array = JSON.parse(course_string)
+		
+		course_array.each do |c|
+			Course.create!( title: c["title"], 
+						subject: s, 
+						term: c["term"], 
+						catalog_number: c["catalog_num"] , 
+						professor_name: c["instructor"]["name"]
+						)
+		end
+
+	end
+end
