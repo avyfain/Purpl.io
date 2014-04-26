@@ -25,8 +25,8 @@
 				<% for i in 0..5 %>
 					<br><br>
 					<div class = "row">
-						<div class = "col-md-10">
-							<p>What is the answer to homework 3 problem 2a?</p>
+						<div class = "col-md-10 col-md-offset-1">
+							<p class = "question">What is the answer to homework 3 problem 2a?</p>
 						</div>
 					</div>
 					<div class = "row">
@@ -74,17 +74,15 @@
 
 	#newsfeed {
 		border-radius: 1%;
+		min-height: 470px;
+		max-height: 470px;
 		background-color: rgba(255, 255, 255, .8);
 	}
 
 	.tab-pane {
+		min-height: 350px;
 		max-height: 350px;
 		overflow: scroll;
-	}
-
-	.tab-content p {
-		font-size: 200%;
-		line-height: 150%;
 	}
 
 	.question {
@@ -93,7 +91,7 @@
 	}
 
 	.question_info {
-		font-size: 150%;
+		font-size: 100%;
 		line-height: 150%;
 	}
 	

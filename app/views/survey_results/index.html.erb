@@ -106,7 +106,7 @@
     smil_text = "Yay, your class is awesome!"
     }
   else if (score >55) {
-    smiley = ":)";
+    smiley = "fa-smile-o";
     smil_text = "People seem to like your class."
     }
   else if (score >45) {
@@ -118,7 +118,7 @@
     smil_text = "Your students are unhappy, do something about it!"
   }
   
-  $("#smiley").append('<div style="-webkit-transform:rotate(90deg);">'+smiley+'</div><p>'+ smil_text+'</p>');
+  $("#smiley").append('<i class="fa '+smiley+'"></i><p>'+ smil_text+'</p>');
 
 
 </script>
