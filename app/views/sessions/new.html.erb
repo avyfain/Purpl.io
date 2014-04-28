@@ -12,8 +12,8 @@
                 </div>
                 <div class="panel-body">
                 	<%= form_tag "/session", class: "form-horizontal sign-in" do %>
-	 				   	<%= text_field_tag :email, nil, placeholder: "Email Address", class: "form-control login-fields" %>                        
-	                    <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control" %>
+	 				   	<%= text_field_tag :email, nil, placeholder: "Email Address", class: "form-control login-fields", :value => "Marvin@purpl.io" %>                        
+	                    <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control", :value => "123" %>
 	                    <br>
 	                    <%= submit_tag "Sign In", class: "btn btn-custom-lighten pull-right" %>
 	                <% end %>
