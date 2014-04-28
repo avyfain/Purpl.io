@@ -1,46 +1,46 @@
 <header>
-	<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<% if current_student %>
-				<span class="navbar-brand"><%= link_to "Purpl.io", student_path(current_student.id), id: "logo" %></span>
-				<% elsif current_professor %>
-				<span class="navbar-brand"><%= link_to "Purpl.io", professor_path(current_professor.id), id: "logo"%></span>
-				<% else %>
-				<span class="navbar-brand"><%= link_to "Purpl.io", root_path, id: "logo" %></span>
-				<% end %>
-			</div>
-        <div class="navbar-collapse collapse">
-		  <% if current_professor %>
-		  <ul class="nav navbar-nav">
-		  	<li class="dropdown">
-		  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Reviews<b class="caret"></b></a>
-		  		<ul class="dropdown-menu">
-		  			<%current_professor.courses.each do |c| %>
-		  			<li><%= link_to "#{c.subject}-#{c.catalog_number}",  course_survey_results_path(c.id) %></li>
-		  			<% end %>
-		  		</ul>
-		  	</li>
-		  	<% end %>
-		  </ul>
-		  <ul class="nav navbar-nav navbar-right">
-  	<% if current_professor %>
-  	<li><%= link_to "Student Feedback",  '#' %></li>
-  	<% end %>
-  	<% if current_student or current_professor %>
-  	<li><%= link_to "Edit Courses",  '#' %></li>
-  	<li><%= link_to "My Account",  '#' %></li>
-  	<li class="divider"></li>
-  	<li><%= link_to "Log Out", session_path, :method => :delete %></li>
-  	<% end %>
-  </ul>
-</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
+  <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <% if current_student %>
+        <span class="navbar-brand"><%= link_to "Purpl.io", student_path(current_student.id), id: "logo" %></span>
+        <% elsif current_professor %>
+        <span class="navbar-brand"><%= link_to "Purpl.io", professor_path(current_professor.id), id: "logo"%></span>
+        <% else %>
+        <span class="navbar-brand"><%= link_to "Purpl.io", root_path, id: "logo" %></span>
+        <% end %>
+      </div>
+      <div class="navbar-collapse collapse">
+        <% if current_professor %>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Reviews<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <%current_professor.courses.each do |c| %>
+              <li><%= link_to "#{c.subject}-#{c.catalog_number}",  course_survey_results_path(c.id) %></li>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_professor %>
+          <li><%= link_to "Student Feedback",  '#' %></li>
+          <% end %>
+          <% if current_student or current_professor %>
+          <li><%= link_to "Edit Courses",  '#' %></li>
+          <li><%= link_to "My Account",  '#' %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Log Out", session_path, :method => :delete %></li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 </header>
